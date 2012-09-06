@@ -1,0 +1,14 @@
+{% load i18n %}
+<!doctype html>
+<html lang={{ LANGUAGE_CODE }}>
+  <head>
+    <meta charset=utf-8>
+    
+    <title>{% block title_meta %}{% endblock %} &mdash; {{ current_site.name }}</title>
+    
+    <link rel="stylesheet" href="{{ STATIC_URL }}design/css/main.css" />
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>
