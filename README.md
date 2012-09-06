@@ -1,7 +1,7 @@
-skileton : templates pour Django
+skilleton : templates pour Django
 ================================
 
-skileton contient deux templates :
+skilleton contient deux templates :
 
   1. `project_template` est utilisé pour initialiser un nouveau projet
   2. `app_template` sert à ajouter une application au sein d'un projet
@@ -21,7 +21,7 @@ Initialisation d'un projet Django
 Utilisation
 -----------
 
-    $ django-admin.py startproject $PROJECT_NAME --template=skileton/project_template
+    $ django-admin.py startproject $PROJECT_NAME --template=skilleton/project_template
 
 
 Après l'initialisation
@@ -51,7 +51,7 @@ Ajout d'une application
 **Commandes :**
 
     cd apps
-    ../manage.py startapp $APP_NAME --template=skileton/app_template
+    ../manage.py startapp $APP_NAME --template=skilleton/app_template
     # ajout à INSTALLED_APPS
     ../manage.py schemamigration $APP_NAME --initial
     ../manage.py migrate
