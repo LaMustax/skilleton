@@ -4,10 +4,10 @@
 from os.path import abspath, basename, dirname, join, normpath
 
 # # #
-# CONSTANTES pour les chemins absolus
+# CONSTANTES pour les chemins absolus et le nom du projet
 #
-DJANGO_ROOT = dirname(dirname(dirname(abspath(__file__))))
-
+PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
+PROJECT_NAME = basename(PROJECT_ROOT)
 
 # # #
 # ADMINS
@@ -50,14 +50,14 @@ USE_TZ = True
 #
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = normpath(join(DJANGO_ROOT, 'public/media'))
+MEDIA_ROOT = normpath(join(PROJECT_ROOT, 'public/media'))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
 MEDIA_URL = ''
 
-ADMIN_MEDIA_ROOT = normpath(join(DJANGO_ROOT, 'public/media/admin'))
+ADMIN_MEDIA_ROOT = normpath(join(PROJECT_ROOT, 'public/media/admin'))
 
 
 # # #
@@ -67,7 +67,7 @@ ADMIN_MEDIA_ROOT = normpath(join(DJANGO_ROOT, 'public/media/admin'))
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = normpath(join(DJANGO_ROOT, 'public/static'))
+STATIC_ROOT = normpath(join(PROJECT_ROOT, 'public/static'))
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -78,7 +78,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    normpath(join(DJANGO_ROOT, 'static')),
+    normpath(join(PROJECT_ROOT, 'static')),
 )
 
 # List of finder classes that know how to find static files in
@@ -97,7 +97,7 @@ STATICFILES_FINDERS = (
 # Lit le fichier .secret_key qui n'est pas versionné
 # Ce n'est pas un fichier python
 # Cf: https://code.djangoproject.com/wiki/SplitSettings#Differentsettingsindifferentfiles
-SECRET_KEY = open(join(DJANGO_ROOT, '.secret_key')).read().strip()
+SECRET_KEY = open(join(PROJECT_ROOT, PROJECT_NAME, 'settings', '.secret_key')).read().strip()
 
 
 # # #
@@ -114,7 +114,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    normpath(join(DJANGO_ROOT, 'templates')),
+    normpath(join(PROJECT_ROOT, 'templates')),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -220,5 +220,5 @@ LOGGING = {
 # TESTS
 #
 FIXTURE_DIRS = (
-    normpath(join(DJANGO_ROOT, 'fixtures')),
+    normpath(join(PROJECT_ROOT, 'fixtures')),
 )

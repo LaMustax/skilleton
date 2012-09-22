@@ -21,23 +21,22 @@ Initialisation d'un projet Django
 Utilisation
 -----------
 
-    $ django-admin.py startproject $PROJECT_NAME --template=skilleton/project_template
+    $ django-admin.py startproject $PROJECT_NAME --template=skilleton/project_template --name=.secret_key
 
 
 Après l'initialisation
 ----------------------
 
-  1. renommer `secret_key.py` en .secret_key !FIXME
-  2. créer le virtualenv
-  3. installer les programmes requis
-  4. initialiser la base de données
-  5. virer l'internationalisation si ce n'est pas nécessaire
+  1. créer le virtualenv avec les programmes requis (alternative pour alwaysdata)
+  2. initialiser la base de données
+  3. virer l'internationalisation si ce n'est pas nécessaire
 
 **Commandes :**
 
-    mv $PROJECT_NAME/settings/secret_key.py $PROJECT_NAME/.secret_key
-    mkvirtualenv $PROJECT_VENV
-    pip install -r requirements.txt
+    mv $PROJECT_NAME/settings/secret_key.py $PROJECT_NAME/settings/.secret_key
+    mkvirtualenv -r requirements.txt --no-site-packages $PROJECT_VENV
+    # alternative pour éviter les désagréments en déployant sur alwaysdata
+    mkvirtualenv -r requirements.txt -p=/usr/bin/python2.6 --no-site-packages $PROJECT_VENV
     ./manage.py syncdb
 
 
@@ -60,6 +59,5 @@ Ajout d'une application
 To-do list
 ==========
 
-  * Changer le comportement bordélique de la secretkey ...
   * Tout traduire en français
   * Ajouter le support de [Haystack](http://haystacksearch.org)
