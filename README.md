@@ -32,14 +32,17 @@ Après l'initialisation
   3. virer l'internationalisation si ce n'est pas nécessaire
 
 **Commandes :**
-
-    mv $PROJECT_NAME/settings/secret_key.py $PROJECT_NAME/settings/.secret_key
     
-    mkvirtualenv -r requirements.txt --no-site-packages $PROJECT_VENV
+    mkvirtualenv -r requirements.txt $PROJECT_VENV
     # alternative pour éviter les désagréments en déployant sur alwaysdata
-    mkvirtualenv -r requirements.txt -p=/usr/bin/python2.6 --no-site-packages $PROJECT_VENV
+    mkvirtualenv -r requirements.txt -p /usr/bin/python2.6 $PROJECT_VENV
     
-    ./manage.py syncdb
+    # Bonne pratique : utiliser django-admin.py plutôt que manage.py
+    add2virtualenv $(pwd)'/$PROJECT_NAME'
+    echo "export DJANGO_SETTINGS_MODULE=$PROJECT_NAME.settings.dev" >> $VIRTUAL_ENV/bin/postactivate
+    echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+    
+    django-admin.py syncdb
 
 
 Ajout d'une application
@@ -52,10 +55,10 @@ Ajout d'une application
 **Commandes :**
 
     cd apps
-    ../manage.py startapp $APP_NAME --template=skilleton/app_template
+    django-admin.py startapp $APP_NAME --template=skilleton/app_template
     # ajout à INSTALLED_APPS
-    ../manage.py schemamigration $APP_NAME --initial
-    ../manage.py migrate
+    django-admin.py schemamigration $APP_NAME --initial
+    django-admin.py migrate
 
 
 To-do list
